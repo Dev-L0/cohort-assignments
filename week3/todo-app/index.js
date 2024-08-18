@@ -15,14 +15,14 @@ function addTodo() {
       "grid",
       "grid-cols-[auto,1fr,auto]",
       "items-center",
-      "mb-4",
+      "mb-2",
       "md:flex-wrap",
       "lg:flex-nowrap",
       
     );
     document.body.appendChild(todoItem);
 
-    const h4 = document.createElement("h4");
+    let h4 = document.createElement("h4");
     h4.innerHTML = inputEl.value;
     h4.classList.add("todo-text");
     todoItem.appendChild(h4);
@@ -46,9 +46,8 @@ function addTodo() {
     buttonContainer.appendChild(editBtn);
 
     check.onclick = (e) => {
-      console.log("clicked");
       if (e.target.checked) {
-        h4.style.textDecoration = "10px solid red line-through";
+        h4.style.textDecoration = "5px solid black line-through";
       } else {
         h4.style.textDecoration = "none";
       }
@@ -62,8 +61,23 @@ function addTodo() {
     };
 
     editBtn.onclick = (e) => {
-      h4.contentEditable = h4.contentEditable === "true" ? "false" : "true";
-      editBtn.textContent = h4.contentEditable === "true" ? "Done" : "Edit";
+      let inputE = document.createElement("input");
+      if(editBtn.textContent === "Edit"){
+        inputE.type = "text";
+        inputE.value = h4.textContent;
+        inputE.classList.add("input-sm", "border-blue-500", "input-secondary","w-full", "max-w-xs");
+        todoItem.replaceChild(inputE, h4);
+        h4 = inputE;
+        inputE.focus();
+        editBtn.innerHTML = "Done";
+      } else {
+         let updatedValue = h4.value;
+         let textNode = document.createTextNode(updatedValue);
+         todoItem.replaceChild(textNode, h4);
+         editBtn.innerHTML = "Edit";
+      }
+      
+      
     };
 
     const todoList = document.querySelector("#todo-list");
