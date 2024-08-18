@@ -15,9 +15,10 @@ function addTodo() {
       "grid",
       "grid-cols-[auto,1fr,auto]",
       "items-center",
-      "mb-2",
+      "mb-4",
       "md:flex-wrap",
-      "lg:flex-nowrap"
+      "lg:flex-nowrap",
+      
     );
     document.body.appendChild(todoItem);
 
